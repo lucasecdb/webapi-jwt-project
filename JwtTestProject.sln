@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtTestProject", "JwtTestProject.csproj", "{A772120D-6B83-4829-AD4C-AEF7BC884F1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A772120D-6B83-4829-AD4C-AEF7BC884F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A772120D-6B83-4829-AD4C-AEF7BC884F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A772120D-6B83-4829-AD4C-AEF7BC884F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A772120D-6B83-4829-AD4C-AEF7BC884F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

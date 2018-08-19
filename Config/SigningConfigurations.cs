@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Crypto;
@@ -8,8 +9,9 @@ using Org.BouncyCastle.Security;
 
 namespace JwtTestProject.Config
 {
-    public class SigningConfigurations
+    public class SigningConfigurations : IDisposable
     {
+        private RSACryptoServiceProvider _cryptoServiceProvider;
         public SecurityKey Key { get; }
         public SigningCredentials SigningCredentials { get; }
 
@@ -24,15 +26,33 @@ namespace JwtTestProject.Config
             }
 
             var rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters) keyPair.Private);
+            
+            _cryptoServiceProvider = new RSACryptoServiceProvider();
 
-            using (var provider = new RSACryptoServiceProvider())
-            {
-                provider.ImportParameters(rsaParams);
-                Key = new RsaSecurityKey(provider);
-            }
+            _cryptoServiceProvider.ImportParameters(rsaParams);
+            Key = new RsaSecurityKey(_cryptoServiceProvider);
 
             SigningCredentials = new SigningCredentials(
                 Key, SecurityAlgorithms.RsaSha256);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _cryptoServiceProvider?.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~SigningConfigurations()
+        {
+            Dispose(false);
         }
     }
 }
